@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            div,ul,li,img,p,h2{
+                margin: 0;
+                padding: 0;
+            }
+            div{
+                width: 400px;
+                height: 230px;
+                margin:150px auto;
+                border: 1px solid #ffadad;
+                padding: 5px;
+                overflow: hidden;
+                position: relative;
+            }
+            li{
+                list-style: none;
+                width: 70px;
+                text-align: center;
+                height: 33px;
+                line-height: 33px;
+                border: 1px solid #ffadad;
+                margin-bottom: 4px;
+                background: #ffe7ef;
+                border-radius: 2px;
+                padding:0 5px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+            div ul{
+                height: 230px;
+            }
+            div ul:first-child{
+                float: left;
+            }
+            div ul:nth-child(2){
+                float: right;
+            }
+            div img{
+                width: 216px;
+                height: 230px;
+                margin-left: 10px;
+            }
+            div h2,div p{
+                width: 211px;
+                height: 30px;
+                line-height: 30px;
+                position: absolute;
+                left: 97px;
+                opacity: 0.8;
+                padding-left: 5px;
+            }
+            div h2{
+                background: #ffd6d6;
+                color: #ce0000;
+                bottom: 35px;
+            }
+            div p{
+                bottom: 5px;
+                font-size: 18px;
+                background: #ccc;
+            }
+            div .yanse{
+                background: #ff4a6b;
+            }
+</style>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementsByTagName('div')[0],
+                oH2=oDiv.getElementsByTagName('h2')[0],
+                oP=oDiv.getElementsByTagName('P')[0],
+                aUl=oDiv.getElementsByTagName('ul'),
+                ulLis=aUl[0].getElementsByTagName('li'),
+                aLi=oDiv.getElementsByTagName('li'),
+                oImg=oDiv.getElementsByTagName('img')[0],
+                imgSrc=['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg','img/5.jpg','img/6.jpg','img/7.jpg','img/8.jpg','img/9.jpg','img/10.jpg','img/11.jpg','img/12.jpg'],
+                liText=['T恤','手表','背包','皮鞋','西裤','女包','行李箱','钱包','拖鞋','毛巾','衣架','雨伞'],
+                pText=['35元起','185元起','68元起','99元起','109元起','119元起','129元起','48元起','9.9元起','6.9元起','8.8元起','16.8元起'],
+                num=0,
+                time=null;
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].index=i;
+                aLi[i].innerHTML=liText[i];
+                aLi[i].addEventListener('mouseover',chumo,false);
+            }
+            function fn(){
+                for(var i=0;i<aLi.length;i++){
+                aLi[i].className='';
+            }
+                oImg.src=imgSrc[num];
+                oP.innerHTML=pText[num];
+                oH2.innerHTML=liText[num];
+                aLi[num].className='yanse'
+            }
+            fn();
+            time=setInterval(lunbo,1000);
+            function lunbo(){
+                if(num<ulLis.length-1){
+                    num++;
+                    fn();
+                }
+                else{
+                    if(num===ulLis.length-1){
+                        num=aLi.length;
+                    }
+                    else if(num===ulLis.length){
+                        num=1;
+                    }
+                    num--;
+                    fn();
+                    
+                }
+            }
+            oDiv.addEventListener('mouseover',chupeng,false);
+            oDiv.addEventListener('mouseout',likai,false);
+            function chupeng(){
+                clearInterval(time);
+            }
+            function likai(){
+                clearInterval(time);
+                time=setInterval(lunbo,1000);
+            }
+            function chumo(){
+                num=this.index;
+                fn();
+            }
+        }
+    </script>
+    </head>
+    <body>
+        <div>
+            <ul>
+                <li class="yanse">正在加载中</li>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+            </ul>
+            <ul>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+                <li>正在加载中</li>
+            </ul>
+            <img src="img/1.jpg">
+            <h2>正在加载中</h2>
+            <p>正在加载中</p>
+        </div>
+    </body>
+</html>
