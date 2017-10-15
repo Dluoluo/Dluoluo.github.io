@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div,
+        ul,
+        li,
+        img,
+        h2,
+        span {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div {
+            width: 900px;
+            height: 345px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+
+        #div ul {
+            width: 6000px;
+        }
+
+        #div li {
+            list-style: none;
+            float: left;
+            position: relative;
+        }
+
+        #div div {
+            width: 900px;
+            height: 60px;
+            position: absolute;
+            bottom: -95px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 50px;
+            line-height: 2em;
+            color: #ffffff;
+        }
+
+        img {
+            width: 1000px;
+        }
+    </style>
+    <script>
+        function getStyle(obj, name) {
+            return obj.curreteStyle ? obj.curreteStyle[name] : getComputedStyle(obj)[name];
+        };
+        window.onload = function () {
+            var oDiv = document.getElementById('div'),
+                oUl = oDiv.getElementsByTagName('ul')[0],
+                aDiv = oDiv.getElementsByTagName('div'),
+                aLi = oUl.getElementsByTagName('li'),
+                aImg = oUl.getElementsByTagName('img'),
+                aH2 = oUl.getElementsByTagName('h2'),
+                aSpan = oUl.getElementsByTagName('span'),
+                imgSrc = ['img/0.jpg', 'img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg','img/0.jpg'],
+                h2Text = ['李宇春', '无心法师2', '中餐厅', '极限挑战', '明日之子','李宇春'],
+                spanText = ['《一百种热爱》发布', '小丁猫攻气十足', '赵薇黄晓明友情遇考验', '孙红雷变嘚瑟遛鸟大爷', '最强厂牌8进7进击战','《一百种热爱》发布'];
+                time=null;
+
+            
+            for (var i = 0; i < aImg.length; i++) {
+                aImg[i].src = imgSrc[i];
+                aH2[i].innerHTML = h2Text[i];
+                aSpan[i].innerHTML = spanText[i];
+            }
+            var imgW=-parseInt(getStyle(aImg[0],'width')),
+                num=1;
+
+            function huidiao(){
+               xiangzuo(oUl,'marginLeft',10,-parseInt(getStyle(oUl,'width'))+1000,function(){fn(aDiv[num],'bottom',5,0,function(){fn(aDiv[num],'bottom',5,-95,function(){huidiao()})})}); 
+            }
+            setTimeout(huidiao,1000);
+            function xiangzuo(obj,name,sudu,target,fn){
+                target>parseInt(getStyle(obj,name))?sudu=sudu:sudu=-sudu;
+                clearInterval(time);
+                time=setInterval(function(){
+                    var yidong=parseInt(getStyle(obj,name))+sudu;
+                    if(yidong>target&&target>=0||yidong<target&&target<0){
+                        yidong=target;
+                    }
+                    if(yidong>imgW&&yidong>0||yidong<imgW&&yidong<0){
+                        yidong=imgW;
+                    }
+                    obj.style[name]=yidong+'px';
+                    if(yidong===imgW&&yidong===target){
+                        imgW=0;
+                        clearInterval(time);
+                        fn&&fn();
+                    }
+                    if(yidong===imgW){
+                        imgW=imgW-1000;
+                        clearInterval(time);
+                        fn&&fn();
+                    }
+                },20)
+            }
+            function fn(obj,name,sudu,target,fn){
+                if(num===aDiv.length){
+                    num=0;
+                    fn&&fn();
+                }
+                target>parseInt(getStyle(obj,name))?sudu=sudu:sudu=-sudu;
+                clearInterval(obj.time);
+                obj.time=setInterval(function(){
+                    var yidong=parseInt(getStyle(obj,name))+sudu;
+                    if(yidong>target&&target>=0||yidong<target&&target<0){
+                        yidong=target;
+                    }
+                    obj.style[name]=yidong+'px';
+                    if(yidong===target){
+                        clearInterval(obj.time);
+                        setTimeout(function(){fn&&fn();},500);
+                        if(yidong===-95){
+                            num++;
+                        }
+                    }
+                },30)
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id='div'>
+        <ul>
+            <li>
+                <img src="" alt="">
+                <div>
+                    <h2></h2>
+                    <span></span>
+                </div>
+            </li>
+            <li>
+                <img src="" alt="">
+                <div>
+                    <h2></h2>
+                    <span></span>
+                </div>
+            </li>
+            <li>
+                <img src="" alt="">
+                <div>
+                    <h2></h2>
+                    <span></span>
+                </div>
+            </li>
+            <li>
+                <img src="" alt="">
+                <div>
+                    <h2></h2>
+                    <span></span>
+                </div>
+            </li>
+            <li>
+                <img src="" alt="">
+                <div>
+                    <h2></h2>
+                    <span></span>
+                </div>
+            </li>
+            <li>
+                <img src="" alt="">
+                <div>
+                    <h2></h2>
+                    <span></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
