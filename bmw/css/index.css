@@ -523,6 +523,7 @@ body,
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   z-index: 3;
+  display: none;
 }
 #warp #wenda {
   overflow: hidden;

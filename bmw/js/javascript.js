@@ -129,12 +129,14 @@ function yuyue() {
     wendaFanhui = document.querySelector('#wenda-fanhui'),
     oShijia = document.querySelector('#shijia');
 
-
+  
   //设置3d加速，设置fransform初始值
   transForm(oShijia, 'translateZ', 0.01);
   transForm(oShijia, 'translateX', htmlWidth);
   transForm(oWenda, 'translateZ', 0.01);
   transForm(oWenda, 'translateX', htmlWidth);
+  oWenda.style.display='block';
+  oShijia.style.display='block';
 
   //手指抬起时蒙层和预约试驾页面出现
   oDianji.addEventListener('touchend', function () { end(oShijia) }, false);
@@ -143,7 +145,7 @@ function yuyue() {
   oBut.addEventListener('mouseup', function () { end(oWenda) }, false);
   function end(el) {
     oTiwen.style.WebkitTransition = oTiwen.style.transition = 'none';
-    transForm(oTiwen, 'translateY', tiwenH);
+    //transForm(oTiwen, 'translateY', tiwenH);
     oMeng.style.display = 'block';
     el.style.WebkitTransition = el.style.transition = '500ms'
     transForm(el, 'translateX', 0);
